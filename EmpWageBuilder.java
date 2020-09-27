@@ -105,27 +105,38 @@ class Employee implements Wage{
 }
 
 public class EmpWageBuilder {
+    private static List<Employee> employees = new ArrayList<>();
+    private static List<Company> companies = new ArrayList<>();
+
+    public static void newEmployee(Employee e, Company parent) {
+        parent.hire(e);
+        e.setCompany(parent);
+        employees.add(e);
+    }
+
+    public static void newCompany(Company company) {
+        companies.add(company);
+    }
+
     public static void main(String[] args) {
         System.out.println("Welcome to Employee wage computation program");
 
-        Company[] companies = new Company[2];
-
         Company capg = new Company(20, 20, 100);
-        companies[0] = capg;
+        newCompany(capg);
         Employee e1 = new Employee();
         Employee e2 = new Employee();
         Employee e3 = new Employee();
-        companies[0].hire(e1);
-        companies[0].hire(e2);
-        companies[0].hire(e3);
-        System.out.println("Total emp Wage for capg: " + companies[0].calculateWage());
-
+        newEmployee(e1, capg);
+        newEmployee(e2, capg);
+        newEmployee(e3, capg);
+        System.out.println("Total emp Wage for capg: " + capg.calculateWage());
+        
         Company infy = new Company(18, 20, 160);
-        companies[1] = infy;
+        newCompany(infy);
         Employee e4 = new Employee();
         Employee e5 = new Employee();
-        companies[1].hire(e4);
-        companies[1].hire(e5);
-        System.out.println("Total emp Wage for infy: " + companies[1].calculateWage());
+        newEmployee(e4, infy);
+        newEmployee(e5, infy);
+        System.out.println("Total emp Wage for infy: " + infy.calculateWage());
     }
 }
