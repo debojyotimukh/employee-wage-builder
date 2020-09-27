@@ -100,15 +100,24 @@ public class EmpWageBuilder {
     public static void main(String[] args) {
         System.out.println("Welcome to Employee wage computation program");
 
-        Company capg = new Company(20, 20, 100);
+        Company[] companies = new Company[2];
 
+        Company capg = new Company(20, 20, 100);
+        companies[0] = capg;
         Employee e1 = new Employee();
         Employee e2 = new Employee();
         Employee e3 = new Employee();
-        capg.hire(e1);
-        capg.hire(e2);
-        capg.hire(e3);
-        System.out.println("Total emp Wage for capg: " + capg.totalSalaryExpence());
+        companies[0].hire(e1);
+        companies[0].hire(e2);
+        companies[0].hire(e3);
+        System.out.println("Total emp Wage for capg: " + companies[0].totalSalaryExpence());
 
+        Company infy = new Company(18, 20, 160);
+        companies[1] = infy;
+        Employee e4 = new Employee();
+        Employee e5 = new Employee();
+        companies[1].hire(e4);
+        companies[1].hire(e5);
+        System.out.println("Total emp Wage for infy: " + companies[1].totalSalaryExpence());
     }
 }
