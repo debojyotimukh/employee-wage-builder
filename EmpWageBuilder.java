@@ -60,7 +60,7 @@ class Company implements Wage{
 class Employee implements Wage{
 
     Company company;
-
+    int[] dailywages;
     Employee() {
     };
 
@@ -82,6 +82,7 @@ class Employee implements Wage{
 
         int totalWage = 0;
         int totalHrs = 0;
+        dailywages=new int[company.getMaxDays()];
         for (int day = 0; day < company.getMaxDays() && totalHrs < company.getMaxHrs(); day++) {
             int empHrs = 0;
             int empWage = 0;
@@ -98,9 +99,14 @@ class Employee implements Wage{
             }
             totalHrs += empHrs;
             empWage = empHrs * company.getWage();
+            dailywages[day]=empWage;
             totalWage += empWage;
         }
         return totalWage;
+    }
+
+    public int[] getDailyWages(){
+        return dailywages;
     }
 }
 
@@ -138,5 +144,9 @@ public class EmpWageBuilder {
         newEmployee(e4, infy);
         newEmployee(e5, infy);
         System.out.println("Total emp Wage for infy: " + infy.calculateWage());
+
+        for(int wage:e1.getDailyWages())
+            System.out.print(wage+", ");
+        System.out.println("Total wage by e1:"+e1.calculateWage());
     }
 }
