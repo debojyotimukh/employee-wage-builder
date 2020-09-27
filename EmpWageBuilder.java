@@ -1,14 +1,41 @@
-class Employee{
-    public static final int EMP_RATE_PER_HOUR = 20;
+class Company {
+    private int empRatePerHr;
+    private int workingDaysPerMonth;
+    private int maxWorkingHrs;
+
+    public Company(int wage, int workingDays, int maxWorkingHrs) {
+        this.empRatePerHr = wage;
+        this.workingDaysPerMonth = workingDays;
+        this.maxWorkingHrs = maxWorkingHrs;
+    }
+
+    public int getWage() {
+        return empRatePerHr;
+    }
+
+    public int getMaxDays() {
+        return workingDaysPerMonth;
+    }
+
+    public int getMaxHrs() {
+        return maxWorkingHrs;
+    }
+}
+
+class Employee {
     public static final int IS_FULL_TIME = 2;
     public static final int IS_PART_TIME = 1;
-    public static final int WORKING_DAY_MONTH = 20;
-    public static final int MAX_WORKING_HRS = 100;
 
-    public int calculateWage(){
+    Company company;
+
+    Employee(Company company) {
+        this.company = company;
+    }
+
+    public int calculateWage() {
         int totalWage = 0;
         int totalHrs = 0;
-        for (int day = 0; day < WORKING_DAY_MONTH && totalHrs < MAX_WORKING_HRS; day++) {
+        for (int day = 0; day < company.getMaxDays() && totalHrs < company.getMaxHrs(); day++) {
             int empHrs = 0;
             int empWage = 0;
             int empCheck = (int) Math.floor(Math.random() * 10) % 3;
@@ -23,18 +50,23 @@ class Employee{
                     empHrs = 0;
             }
             totalHrs += empHrs;
-            empWage = empHrs * EMP_RATE_PER_HOUR;
+            empWage = empHrs *company.getWage();
             totalWage += empWage;
         }
         return totalWage;
     }
 }
+
 public class EmpWageBuilder {
-    
+
     public static void main(String[] args) {
         System.out.println("Welcome to Employee wage computation program");
 
-        Employee e1=new Employee();
-        System.out.println("Emp Wage: " + e1.calculateWage());
+        Company capg=new Company(20, 20, 100);
+        Employee e1 = new Employee(capg);
+        System.out.println("Emp Wage for Emp1 of capg: " + e1.calculateWage());
+        Company infy=new Company(18, 20, 160);
+        Employee e2=new Employee(infy);
+        System.out.println("Emp Wage for Emp2 of infy: " + e2.calculateWage());
     }
 }
