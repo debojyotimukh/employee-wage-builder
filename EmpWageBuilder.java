@@ -1,7 +1,17 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class Company {
+/**
+ * Wage
+ */
+interface Wage {
+    public static final int IS_FULL_TIME = 2;
+    public static final int IS_PART_TIME = 1;
+
+    public int calculateWage();
+}
+
+class Company implements Wage{
     private int empRatePerHr;
     private int workingDaysPerMonth;
     private int maxWorkingHrs;
@@ -36,7 +46,7 @@ class Company {
         emplist.remove(e);
     }
 
-    public int totalSalaryExpence() {
+    public int calculateWage() {
         if (totalSalary != -1)
             return totalSalary;
         int totalSalary = 0;
@@ -47,9 +57,7 @@ class Company {
     }
 }
 
-class Employee {
-    public static final int IS_FULL_TIME = 2;
-    public static final int IS_PART_TIME = 1;
+class Employee implements Wage{
 
     Company company;
 
@@ -110,7 +118,7 @@ public class EmpWageBuilder {
         companies[0].hire(e1);
         companies[0].hire(e2);
         companies[0].hire(e3);
-        System.out.println("Total emp Wage for capg: " + companies[0].totalSalaryExpence());
+        System.out.println("Total emp Wage for capg: " + companies[0].calculateWage());
 
         Company infy = new Company(18, 20, 160);
         companies[1] = infy;
@@ -118,6 +126,6 @@ public class EmpWageBuilder {
         Employee e5 = new Employee();
         companies[1].hire(e4);
         companies[1].hire(e5);
-        System.out.println("Total emp Wage for infy: " + companies[1].totalSalaryExpence());
+        System.out.println("Total emp Wage for infy: " + companies[1].calculateWage());
     }
 }
