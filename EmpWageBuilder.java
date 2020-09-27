@@ -46,6 +46,7 @@ class Company implements Wage{
         emplist.remove(e);
     }
 
+    // total salary expense incurred by the company
     public int calculateWage() {
         if (totalSalary != -1)
             return totalSalary;
